@@ -1,0 +1,36 @@
+@import "variables";
+
+$btn-height: 30px;
+$btn-width: 260px;
+
+.hidden {
+  display: none !important;
+}
+
+%responsive-img {
+  width: 100%;
+}
+
+%primary-btn {
+  background-image: url(http://funkyimg.com/i/2Bbdx.png);
+  background-repeat: repeat;
+  background-color: transparent;
+  background-size: cover;
+  border: 0;
+  color: $white-color;
+  cursor: pointer;
+  display: block;
+  font-family: 'Jura', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  height: $btn-height;
+  width: $btn-width;
+  margin: 20px auto;
+  transition: 0.5s ease;
+  opacity: 0.7;
+
+  &:hover, &:active, &:focus {
+    outline: none;
+    opacity: 1;
+  }
+}

@@ -1,0 +1,51 @@
+@import "variables";
+@import "common";
+
+#test-container {
+  background-image: url(http://forumfiles.ru/files/0011/58/eb/25922.jpg);
+  background-repeat: repeat;
+  background-size: cover;
+  font-family: 'Jura', sans-serif;
+  padding: $lg-padding;
+  max-width: 600px;
+  border: 1px solid $blue-color;
+}
+
+.test-question {
+
+  &__row {
+    font-size: 14px;
+    padding: $md-padding $lg-padding;
+    color: $text-color;
+    transition: .5s ease;
+
+    label {
+      cursor: pointer;
+    }
+
+    &:hover {
+      background-color: fade-out($prompt-color, 0.78);
+      color: $prompt-color;
+    }
+  }
+
+  &__text {
+    background-color: fade-out($prompt-color, 0.78);
+    color: $prompt-color;
+    padding: $md-padding;
+    margin: $md-padding 0;
+  }
+
+  &__img-container {
+    border: 1px solid $blue-color;
+    max-width: 600px;
+  }
+
+  &__img {
+    @extend %responsive-img;
+  }
+}
+
+#next-btn, #restart-btn {
+  @extend %primary-btn;
+}

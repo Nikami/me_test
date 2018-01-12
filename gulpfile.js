@@ -3,7 +3,7 @@ var browserSync = require('browser-sync');
 var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
 var autoprefixer = require('gulp-autoprefixer');
-var cleanCSS = require('gulp-clean-css');
+var cssMin = require('gulp-minify-css');
 var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
 var imagemin = require('gulp-imagemin');
@@ -22,7 +22,7 @@ var config = {
   jsVendorIn: 'src/vendor/*.js',
   imgin: 'src/img/**/*.{jpg,jpeg,png,gif}',
   htmlin: 'src/*.html',
-  scssin: 'src/scss/**/*.scss',
+  scssIn: 'src/scss/**/*.scss',
   cssout: 'dist/css/',
   jsout: 'dist/js/',
   imgout: 'dist/img/',
@@ -46,13 +46,13 @@ gulp.task('serve', ['sass', 'js'], function() {
   });
 
   gulp.watch(config.jsIn, ['js']);
-  gulp.watch(config.scssin, ['sass']);
+  gulp.watch(config.scssIn, ['sass']);
   gulp.watch(config.cssin, ['css', 'reload']);
   gulp.watch([config.htmlin], ['html', 'reload']);
 });
 
 gulp.task('sass', function() {
-  return gulp.src(config.scssin)
+  return gulp.src(config.scssIn)
       .pipe(sourcemaps.init())
       .pipe(sass().on('error', sass.logError))
       .pipe(autoprefixer({
@@ -66,7 +66,7 @@ gulp.task('sass', function() {
 gulp.task('css', function() {
   return gulp.src(config.cssin)
       .pipe(concat(config.cssoutname))
-      .pipe(cleanCSS())
+      .pipe(cssMin({keepSpecialComments: 1, processImport: false }))
       .pipe(gulp.dest(config.cssout));
 });
 
