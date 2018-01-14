@@ -7,13 +7,20 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<div id="test-container"></div>
+<div id="start-container">
+  <button id="start-btn">
+    Начать тест!
+  </button>
+</div>
 
-<script id="test-tmpl" type="text/x-handlebars-template">
+<div id="test-container" style="display: none;">
   {{#each questions as |question|}}
-    <div class="test-question test-question-{{id}} {{question.classes}}">
+    <div class="test-question test-question-{{id}} {{question.classes}}" style="display: none;">
       <div class="test-question__img-container">
         <img src="{{question.imgUrl}}" alt="Test stage" class="test-question__img">
+        <div class="test-question__name">
+          {{question.name}}
+        </div>
       </div>
       <div class="test-question__text">
         {{question.text}}
@@ -21,8 +28,9 @@
       <form id="form-{{question.id}}" class="test-form">
         {{#each answers as |answer|}}
         <div class="test-question__row">
-          <input id="test-answer-{{answer.id}}" name="form-{{question.id}}" type="radio" value="{{answer.value}}"/>
-          <label for="test-answer-{{answer.id}}">
+          <input id="test-answer-{{answer.id}}" name="form-{{question.id}}" type="radio" value="{{answer.value}}"
+                 style="display: none;"/>
+          <label for="test-answer-{{answer.id}}" class="test-question__label">
             {{text}}
           </label>
         </div>
@@ -31,15 +39,25 @@
     </div>
   {{/each}}
 
+  <div id="test-results">
+    {{#each results as |result|}}
+      <div class="test-result test-result-{{result.name}}" style="display: none;">
+        <img src="{{result.src}}" alt="{{result.name}}" class="test-result__img">
+        <div class="test-result__text">
+          {{result.text}}
+        </div>
+      </div>
+    {{/each}}
+  </div>
+
   <button id="next-btn">
     Продолжить
   </button>
   <button id="restart-btn" class="hidden">
     Начать сначала
   </button>
-</script>
+</div>
 
-<script src="js/vendor.js"></script>
 <script src="js/script.js"></script>
 </body>
 </html>

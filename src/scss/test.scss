@@ -1,7 +1,7 @@
 @import "variables";
 @import "common";
 
-#test-container {
+#test-container, #start-container {
   background-image: url(http://forumfiles.ru/files/0011/58/eb/25922.jpg);
   background-repeat: repeat;
   background-size: cover;
@@ -18,15 +18,16 @@
     padding: $md-padding $lg-padding;
     color: $text-color;
     transition: .5s ease;
+    text-align: justify;
 
-    label {
-      cursor: pointer;
-    }
-
-    &:hover {
+    &:hover, &.selected {
       background-color: fade-out($prompt-color, 0.78);
       color: $prompt-color;
     }
+  }
+
+  &__label {
+    cursor: pointer;
   }
 
   &__text {
@@ -34,11 +35,23 @@
     color: $prompt-color;
     padding: $md-padding;
     margin: $md-padding 0;
+    text-align: justify;
+    font-weight: 600;
   }
 
   &__img-container {
     border: 1px solid $blue-color;
     max-width: 600px;
+    position: relative;
+  }
+
+  &__name {
+    position: absolute;
+    font-size: 22px;
+    color: $text-color;
+    bottom: $lg-padding;
+    right: $lg-padding;
+    font-weight: 600;
   }
 
   &__img {
@@ -46,6 +59,38 @@
   }
 }
 
-#next-btn, #restart-btn {
+#test-results {
+  margin: $md-padding;
+}
+
+.test-result {
+  display: table;
+
+  &__img {
+    padding-right: $lg-padding;
+  }
+
+  &__img, &__text  {
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  &__title {
+    display: block;
+    padding-bottom: $lg-padding;
+    font-weight: 600;
+    font-size: 20px;
+  }
+
+  &__text {
+    background-color: fade-out($prompt-color, 0.78);
+    display: table-cell;
+    color: $prompt-color;
+    padding: $md-padding;
+    text-align: justify;
+  }
+}
+
+#next-btn, #restart-btn, #start-btn {
   @extend %primary-btn;
 }
