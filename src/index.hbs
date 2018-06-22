@@ -1,9 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="IE=edge">
+  <title>Mass Effect from Ashes Test</title>
+  <link rel="stylesheet" href="css/styles.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="js/vendor.min.js"></script>
+</head>
+<body>
 <div id="start-container">
   <button id="start-btn">
     Начать тест!
   </button>
 </div>
-
 <div id="test-container" style="display: none;">
   {{#each questions as |question|}}
     <div class="test-question test-question-{{id}} {{question.classes}}" style="display: none;">
@@ -18,13 +30,13 @@
       </div>
       <form id="form-{{question.id}}" class="test-form">
         {{#each answers as |answer|}}
-        <div class="test-question__row">
-          <input id="test-answer-{{answer.id}}" name="form-{{question.id}}" type="radio" value="{{answer.value}}"
-                 style="display: none;"/>
-          <label for="test-answer-{{answer.id}}" class="test-question__label">
-            {{text}}
-          </label>
-        </div>
+          <div class="test-question__row">
+            <input id="test-answer-{{answer.id}}" name="form-{{question.id}}" type="radio" value="{{answer.value}}"
+                   style="display: none;"/>
+            <label for="test-answer-{{answer.id}}" class="test-question__label">
+              {{text}}
+            </label>
+          </div>
         {{/each}}
       </form>
     </div>
@@ -48,3 +60,7 @@
     Начать сначала
   </button>
 </div>
+
+<script src="js/app.min.js"></script>
+</body>
+</html>

@@ -16,23 +16,21 @@ var copy = require('copy');
 var handlebars = require('gulp-compile-handlebars');
 
 var config = {
-  dist: 'dist/',
+  docs: 'docs/',
   src: 'src/',
   hbs: 'src/*.hbs',
   cssin: 'src/css/**/*.css',
   jsIn: 'src/js/**/*.js',
   jsVendorIn: 'src/vendor/*.js',
   imgin: 'src/img/**/*.{jpg,jpeg,png,gif}',
-  htmlin: 'dist/*.html',
+  htmlin: 'docs/*.html',
   scssIn: 'src/scss/**/*.scss',
-  cssout: 'dist/css/',
-  jsout: 'dist/js/',
-  imgout: 'dist/img/',
-  htmlout: 'dist/',
+  cssout: 'docs/css/',
+  jsout: 'docs/js/',
+  imgout: 'docs/img/',
+  htmlout: 'docs/',
   scssout: 'src/css/',
-  cssoutname: 'style.css',
-  jsOutName: 'script.js',
-  jsVendorOutName: 'vendor.js',
+  cssoutname: 'styles.css',
   cssreplaceout: 'css/style.css',
   jsreplaceout: 'js/script.js',
   vendors: ['node_modules/handlebars/dist/handlebars.min.js'],
@@ -359,7 +357,7 @@ gulp.task('reload', function() {
 
 gulp.task('serve', ['sass', 'js'], function() {
   browserSync({
-    server: config.dist
+    server: config.docs
   });
 
   gulp.watch(config.jsIn, ['js']);
@@ -390,7 +388,7 @@ gulp.task('css', function() {
 
 gulp.task('js', function() {
   return gulp.src(config.jsIn)
-      .pipe(concat(config.jsOutName))
+      .pipe(concat('app.min.js'))
       .pipe(uglify())
       .pipe(gulp.dest(config.jsout));
 });
@@ -399,7 +397,7 @@ gulp.task('jsVendor', function() {
   return copy.each(config.vendors, 'src/vendor/', {flatten: true}, function(err) {
     if (err) return console.log(err);
     return gulp.src(config.jsVendorIn)
-        .pipe(concat(config.jsVendorOutName))
+        .pipe(concat('vendor.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest(config.jsout));
   });
@@ -409,7 +407,7 @@ gulp.task('compile', function () {
   return gulp.src('src/index.hbs')
     .pipe(handlebars(config.hbsContext, {}))
     .pipe(concat('index.html'))
-    .pipe(gulp.dest(config.dist));
+    .pipe(gulp.dest(config.docs));
 });
 
 gulp.task('img', function() {
@@ -424,11 +422,11 @@ gulp.task('html', function() {
       .pipe(htmlMin({
         collapseWhitespace: true
       }))
-      .pipe(gulp.dest(config.dist))
+      .pipe(gulp.dest(config.docs))
 });
 
 gulp.task('clean', function() {
-  return del([config.dist]);
+  return del([config.docs]);
 });
 
 gulp.task('build', function() {
